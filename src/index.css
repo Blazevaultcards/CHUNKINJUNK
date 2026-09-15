@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Roboto Slab', serif;
+  --font-body: 'Inter', sans-serif;
+  --color-brand-orange: #e8621a;
+  --color-brand-navy: #1b3a6b;
+  --color-brand-navy-dark: #122a50;
+  --color-brand-navy-light: #234a8a;
+  --color-brand-dark: #0d1b2e;
+  --color-brand-muted: #7b8fa8;
+  --color-brand-light: #f4f6fa;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #e8621a #1b3a6b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #0d1b2e;
+  color: #f4f6fa;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
