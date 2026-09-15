@@ -11,6 +11,9 @@ const PHONE_DISPLAY = "(945) 259-5773";
 const PHONE_TEL = "+19452595773";
 const EMAIL = "Chunkinjunkinfo@gmail.com";
 
+const GOOGLE_SHEET_WEBHOOK_URL =
+  "https://script.google.com/macros/s/AKfycbzJk--jQTi7plVmwQtHGAqWDsaWyu4dOGd18-RbnPhozwDD4amXIVgqajHPILbrYQ-_kw/exec";
+
 const reviews = [
   {
     name: "Maria Thompson",
@@ -386,6 +389,20 @@ function ContactForm() {
         preferred_contact: form.preferredContact,
       },
     ]);
+
+    // Best-effort copy into a Google Sheet for easy browsing. Fire-and-forget:
+    // a failure here never blocks the customer's confirmation, since Supabase
+    // above is the real record of the lead.
+    try {
+      fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(form),
+      });
+    } catch {
+      // ignore — Supabase insert above is the source of truth
+    }
 
     setLoading(false);
     if (insertError) {
